@@ -1,0 +1,184 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <title>Form</title>
+</head>
+
+<body>
+    <div class="container">
+
+
+
+
+            <div class="img-box">
+                <h2>DOCTOR DETAILS</h2>
+             <form action="">
+
+                <input type="text" id="id" placeholder="Enter ID">
+                <input type="text"  id="pnm" placeholder="Enter Doctor Name">
+                <input type="number"  id="ad" placeholder="Enter Mobile No">
+                <input type="time"  id="tm" placeholder="Enter Time">
+                <input type="text"  id="spe" placeholder="Enter Specialties of Doctor ">
+              
+                <input class="btn" type="submit" onclick="addData()">
+                
+
+             </form>
+                
+
+             				
+
+
+        </div>
+
+   
+    <div class="table-box">
+            
+        <table border="1">
+            <thead>
+                <th>No</th>
+                <th>Doctor Name</th>
+                <th>Doctor Email Id</th>
+                <th>Time</th>
+                <th>Specialties of Doctor</th>
+
+                <th><button onclick="mydelete()">delete</button></th>
+                <th><button onclick="myupdate()">Edit</button></th>
+
+            </thead>
+            <tbody id="showdata" >
+                
+
+            </tbody>
+        </table>
+        </div>
+        <div id="demo">
+            
+        </div>
+    
+
+</div>
+
+    <script>
+        function fun(){
+let t=document.getElementById('tog')
+t.classList.toggle('main');
+}
+
+
+async function fet(){
+    let res = await fetch("http://localhost:3000/Doctor")
+    let r = await res.json()
+    let sh = document.querySelector('#showdata')
+
+    let ans = r.map((e)=>`
+    
+    <tr border="1">
+        <td>${e.id}</td>
+        <td>${e.pt_name}</td>
+        <td>${e.ad}</td>
+         <td>${e.time}</td>
+        <td>${e.spe}</td>
+       
+        
+        <td> <button onclick="mydelete(${e.id})"> Delete  </button></td>
+        <td> <button onclick="myupdate(${e.id})"> Edit </button></td>
+        
+    </tr>
+
+    `).join(" ")
+
+    sh.innerHTML=ans
+}
+fet()
+
+//delete data
+
+function mydelete(id){
+    fetch(`http://localhost:3000/Doctor/${id}`,{
+        method:'DELETE'
+    })
+    .then(res=>alert("delete successfully"))
+}
+
+// insert data
+
+function addData(){
+    let myfrmdata = {
+        id:document.getElementById('id').value,
+        pt_name:document.getElementById('pnm').value,
+        ad:document.getElementById('ad').value,
+        time:document.getElementById('tm').value,
+        spe:document.getElementById('spe').value
+      
+      
+    }
+    
+
+    fetch("http://localhost:3000/Doctor",{
+        method:'POST',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify(myfrmdata)
+    })
+
+    .then(res=>alert("inserted"))
+    .catch(er=>alert("error"))
+}
+
+// edit data
+var strid = 0
+async function myupdate(id){
+    strid=id
+   
+    let res = await fetch(`http://localhost:3000/Doctor/${id}`)
+    let r = await res.json()
+    let p =`
+     <input type="text" value="${r.id}" id="id1" readonly>
+     <input type="text" value="${r.pt_name}" id="name1">
+     <input type="text" value="${r.ad}" id="ad1">
+     <input type="text" value="${r.time}" id="time1">
+     <input type="text" value="${r.sp}" id="sp1">
+    
+    
+     <input type="submit" onclick="finalupdate()" value="update">
+    `
+
+    document.getElementById('demo').innerHTML=p
+
+}
+
+function finalupdate(){
+    let y = {
+        id:document.getElementById('id1').value,
+        pt_name:document.getElementById('name1').value,
+        ad:document.getElementById('ad1').value,
+        time:document.getElementById('time1').value,
+        sp:document.getElementById('sp1').value
+       
+        
+        
+    }
+
+    fetch(`http://localhost:3000/Doctor/${strid}`,{
+        method:'PUT',
+        headers:{
+            'Content-type':'application/json'
+        },
+        body:JSON.stringify(y)
+    })
+    .then(res=>alert("Updated"))
+    .catch(ress=>alert("error"))
+}
+    </script>
+
+</body>
+
+</html>
