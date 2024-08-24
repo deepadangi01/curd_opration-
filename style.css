@@ -31,12 +31,23 @@ input{
 table{
     margin: auto;
     width: 50%;
-    background-color: rgb(245, 241, 248);
+    background-color: rgb(239, 188, 233);
+    
+    
 }
+
 #demo{
     display: flex;
     padding: 0px;
 }
 h2{
     text-align: center;
+}
+.bt{
+    background-color: rgb(56, 56, 124);
+    color:white;
+    border-radius: 4px;
+    padding: 3px;
+    
+    
 }

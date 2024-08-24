@@ -44,12 +44,12 @@
             <thead>
                 <th>No</th>
                 <th>Doctor Name</th>
-                <th>Doctor Email Id</th>
+                <th>Doctor Mobile No</th>
                 <th>Time</th>
                 <th>Specialties of Doctor</th>
 
-                <th><button onclick="mydelete()">delete</button></th>
-                <th><button onclick="myupdate()">Edit</button></th>
+                <th><h4 onclick="mydelete()">delete</h3></th>
+                <th><h4 onclick="myupdate()">Edit</h3></th>
 
             </thead>
             <tbody id="showdata" >
@@ -84,11 +84,11 @@ async function fet(){
         <td>${e.pt_name}</td>
         <td>${e.ad}</td>
          <td>${e.time}</td>
-        <td>${e.spe}</td>
+        <td>${e.sp}</td>
        
         
-        <td> <button onclick="mydelete(${e.id})"> Delete  </button></td>
-        <td> <button onclick="myupdate(${e.id})"> Edit </button></td>
+        <td> <button class="bt" onclick="mydelete(${e.id})"> Delete  </button></td>
+        <td> <button class="bt" onclick="myupdate(${e.id})"> Edit </button></td>
         
     </tr>
 
@@ -115,7 +115,7 @@ function addData(){
         pt_name:document.getElementById('pnm').value,
         ad:document.getElementById('ad').value,
         time:document.getElementById('tm').value,
-        spe:document.getElementById('spe').value
+        sp:document.getElementById('spe').value
       
       
     }

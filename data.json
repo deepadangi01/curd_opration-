@@ -1,25 +1,3 @@
 {
-  "Doctor": [
-    {
-      "id": "4",
-      "pt_name": "neeta josi",
-      "ad": "neeta123@gmail.com",
-      "time": "16:22",
-      "spe": "threpis"
-    },
-    {
-      "id": "4",
-      "pt_name": "diya",
-      "ad": "diya345@gmail.com",
-      "time": "16:22",
-      "spe": "dontologiest"
-    },
-    {
-      "id": "5",
-      "pt_name": "deepa dangi",
-      "ad": "dangideepa123@gmail.com",
-      "time": "12:50pm",
-      "sp": "threpis"
-    }
-  ]
+  "Doctor": []
 }
